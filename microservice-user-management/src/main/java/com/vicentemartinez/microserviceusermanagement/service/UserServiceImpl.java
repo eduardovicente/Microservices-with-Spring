@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.vicentemartinez.microserviceusermanagement.model.User;
 import com.vicentemartinez.microserviceusermanagement.repository.UserRepository;
 
+@Service
 public class UserServiceImpl implements UserService {
 	
 	@Autowired

@@ -11,7 +11,7 @@ import com.vicentemartinez.microserviceusermanagement.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
-	
-	@Query("select u.name from user u where u.id in (:pIdList)")
-	List<String> findByIdList(@Param("pIdList") List<Long> idList);
+
+	@Query("select u.name from User u where u.id in (:pIdList)")
+    List<String> findByIdList(@Param("pIdList") List<Long> idList);
 }
