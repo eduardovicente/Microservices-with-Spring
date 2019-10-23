@@ -39,4 +39,9 @@ export class AuthService {
         )
       );
   }
+  register(user: User): Observable<any>{
+    return this.http.post(API_URL + "registration", JSON.stringify(user),{headers: 
+                                                                              {"Content-Type":"application/json; charset-UTF-8"}
+                                                                          });
+  }
 }
