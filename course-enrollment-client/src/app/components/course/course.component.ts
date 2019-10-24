@@ -37,6 +37,7 @@ export class CourseComponent implements OnInit {
           this.currentLog.courseId = this.courseId;
           this.createLog();
           this.showSummary();
+          this.findStudents();
         }
       }
     );
@@ -74,6 +75,14 @@ export class CourseComponent implements OnInit {
         }
       }
     );
+  }
+
+  findStudents(){
+    this.courseService.filterStudents(this.courseId).subscribe(
+      data=>{
+        this.dataSource.data = data;
+      }
+    )
   }
 
 }

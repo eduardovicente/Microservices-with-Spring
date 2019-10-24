@@ -18,7 +18,7 @@ export class CourseService {
     return this.http.post(API_URL + "enroll", JSON.stringify(transaction),
       {
         headers: {
-          "Content-Type":"application/json; charset-UTF-8"
+          "Content-Type": "application/json; charset-UTF-8"
         }
       }
     );
@@ -30,6 +30,30 @@ export class CourseService {
         headers: {
           "Content-Type": "application/json; charset-UTF-8"
         }
+      }
+    );
+  }
+
+  filterStudents(courseId: string): Observable<any> {
+    return this.http.post(API_URL + "students", courseId,
+      {
+        headers: { "Content-Type": "application/json; charset-UTF-8" }
+      }
+    );
+  }
+
+  popularCourses(): Observable<any> {
+    return this.http.get(API_URL + "popular",
+      {
+        headers: { "Content-Type": "application/json; charset=UTF-8" }
+      }
+    );
+  }
+
+  filterCourses(text: string): Observable<any> {
+    return this.http.post(API_URL + "filter", text,
+      {
+        headers: { "Content-Type": "application/json; charset=UTF-8" }
       }
     );
   }

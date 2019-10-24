@@ -23,12 +23,36 @@ export class CourseListComponent implements OnInit {
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    var id;
+    var text;
+    this.route.paramMap.subscribe(
+      params => {
+        if (params.has("id")) {
+          id = params.get("id");
+        }
+        if (params.has("text")) {
+          text = params.get("text");
+        }
+        this.search(id, text);
+      }
+    );
+  }
 
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  search(id, text) {
+    if (id == "1") {
+      this.findAllCourses();
+    } else if (id == "2") {
+      this.popularCourses();
+    } else if (id == "3") {
+      this.filterCourses(text);
+    }
   }
 
   detail(course: Course) {
@@ -55,10 +79,24 @@ export class CourseListComponent implements OnInit {
   findAllCourses() {
     this.courseService.findAllCourses().subscribe(
       data => {
-        this.dataSource.data = data;
+        this.dataSource = new MatTableDataSource(data);
       }
     );
   }
 
+  popularCourses() {
+    this.courseService.popularCourses().subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource(data);
+      }
+    );
+  }
 
+  filterCourses(text: string) {
+    this.courseService.filterCourses(text).subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource(data);
+      }
+    );
+  }
 }
